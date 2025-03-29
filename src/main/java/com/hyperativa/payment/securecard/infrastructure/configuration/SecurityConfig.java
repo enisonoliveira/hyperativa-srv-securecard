@@ -22,7 +22,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/public").permitAll() // Public endpoints
+                .antMatchers("/v3/api-docs",
+                "/v3/api-docs*/**",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/security",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/swagger-ui/**",
+                "/swagger-ui/index.html",
+                "/webjars/**").permitAll() // Public endpoints
                 .anyRequest().authenticated() // All other endpoints require authentication
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Add custom filter

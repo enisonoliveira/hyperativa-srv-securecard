@@ -1,9 +1,5 @@
 package com.hyperativa.payment.securecard.infrastructure.configuration.adapter;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,23 +20,24 @@ public class JwtAuthenticationFilterAdpter extends OncePerRequestFilter{
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(javax.servlet.http.HttpServletRequest request,
+            javax.servlet.http.HttpServletResponse response, javax.servlet.FilterChain filterChain)
+            throws javax.servlet.ServletException, IOException {
+                Authentication authentication ;
+                String authHeader = request.getHeader("Authorization");
+                
+                if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                    
+                    String token = authHeader.substring(7);
         
-        Authentication authentication ;
-        String authHeader = request.getHeader("Authorization");
+                    if (jwtTokenProvider.validateToken(token)) {
+                        authentication = jwtTokenProvider.getAuthentication(token);
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    }
+                }
         
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            
-            String token = authHeader.substring(7);
-
-            if (jwtTokenProvider.validateToken(token)) {
-                authentication = jwtTokenProvider.getAuthentication(token);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-        }
-
-        filterChain.doFilter(request, response);
+                filterChain.doFilter(request, response);
     }
 }
