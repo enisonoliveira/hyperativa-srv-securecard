@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.service;
+package com.hyperativa.payment.securecard.application.service;
 
 import java.util.Collections;
 
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.hyperativa.payment.securecard.infrastructure.adapter.UserAdapter;
+import com.hyperativa.payment.securecard.infrastructure.adapter.repositories.UserAdapter;
 import com.hyperativa.payment.securecard.model.UserEntity;
 
 @Service

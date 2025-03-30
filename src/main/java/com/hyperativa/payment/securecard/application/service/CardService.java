@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.service;
+package com.hyperativa.payment.securecard.application.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,13 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hyperativa.payment.securecard.application.dto.request.CardRequest;
-import com.hyperativa.payment.securecard.infrastructure.adapter.CardAdapter;
+import com.hyperativa.payment.securecard.infrastructure.adapter.repositories.CardAdapter;
 import com.hyperativa.payment.securecard.model.CardEntity;
-import com.hyperativa.payment.securecard.port.CardPort;
-import com.hyperativa.payment.securecard.port.CardServicePort;
+import com.hyperativa.payment.securecard.port.services.CardPortServices;
 
 @Service
-public class CardService implements CardServicePort{
+public class CardService implements CardPortServices{
 
     private final CardAdapter cardPort;
 
@@ -24,7 +23,7 @@ public class CardService implements CardServicePort{
         this.cardPort = cardPort;
     }
 
-    // 1️⃣ Método para salvar um único cartão no banco de dados
+    @Override
     public void saveCard(CardRequest cardRequest) {
         CardEntity card = new CardEntity(
             cardRequest.getCardNumber(),
@@ -35,7 +34,7 @@ public class CardService implements CardServicePort{
         cardPort.save(card);
     }
 
-    // 2️⃣ Método para processar o arquivo TXT
+    @Override
     public void processFile(MultipartFile file) throws IOException {
         List<CardEntity> cards = new ArrayList<>();
 

@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hyperativa.payment.securecard.api.based.AuthBased;
 import com.hyperativa.payment.securecard.application.dto.request.LoginRequest;
 import com.hyperativa.payment.securecard.application.dto.response.TokenResponse;
-import com.hyperativa.payment.securecard.port.JwtTokenPort;
+import com.hyperativa.payment.securecard.port.services.JwtTokenPortServices;
 
 @RestController
 public class AuthController implements  AuthBased{
 
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenPort jwtTokenProvider;
+    private final JwtTokenPortServices jwtTokenProvider;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenPort jwtTokenProvider) {
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenPortServices jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
     }

@@ -2,20 +2,24 @@ package com.hyperativa.payment.securecard.api.controller;
 
 import com.hyperativa.payment.securecard.api.based.CardBased;
 import com.hyperativa.payment.securecard.application.dto.request.*;
-import com.hyperativa.payment.securecard.port.CardServicePort;
+import com.hyperativa.payment.securecard.port.services.CardPortServices;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
+
+
+import com.hyperativa.payment.securecard.port.queue.FileProcessingPort;
 
 @RestController
 public class CardController implements CardBased {
 
-    private final CardServicePort cardService;
+    private final CardPortServices cardService;
+    private final FileProcessingPort fileProcessingPort;
 
-    public CardController(CardServicePort cardService) {
+    public CardController(CardPortServices cardService,FileProcessingPort fileProcessingPort) {
         this.cardService = cardService;
+        this.fileProcessingPort=fileProcessingPort;
     }
 
     
@@ -28,15 +32,8 @@ public class CardController implements CardBased {
    
     @Override
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return ResponseEntity.badRequest().body("File is empty!");
-        }
-
-        try {
-            cardService.processFile(file);
-            return ResponseEntity.ok("File uploaded successfully!");
-        } catch (IOException e) {
-            return ResponseEntity.internalServerError().body("Error processing file");
-        }
+       
+        fileProcessingPort.queueFileProcessing(file);
+        return ResponseEntity.ok("File uploaded successfully!");
     }
 }

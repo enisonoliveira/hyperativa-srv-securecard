@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.exeption;
+package com.hyperativa.payment.securecard.application.exeption;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

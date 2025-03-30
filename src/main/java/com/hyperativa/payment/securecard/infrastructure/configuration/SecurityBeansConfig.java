@@ -8,7 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.hyperativa.payment.securecard.service.CustomUserDetailsService;
+import com.hyperativa.payment.securecard.application.service.CustomUserDetailsService;
 
 import java.util.List;
 

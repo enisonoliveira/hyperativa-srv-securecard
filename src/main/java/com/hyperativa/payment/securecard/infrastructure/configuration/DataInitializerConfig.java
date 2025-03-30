@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.hyperativa.payment.securecard.infrastructure.adapter.UserAdapter;
+import com.hyperativa.payment.securecard.infrastructure.adapter.repositories.UserAdapter;
 import com.hyperativa.payment.securecard.model.UserEntity;
 
 @Configuration

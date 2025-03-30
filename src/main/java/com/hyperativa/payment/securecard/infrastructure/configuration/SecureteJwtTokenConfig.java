@@ -9,20 +9,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.hyperativa.payment.securecard.port.CertificateWorkerPort;
-import com.hyperativa.payment.securecard.port.JwtTokenPort;
+import com.hyperativa.payment.securecard.port.services.CertificateWorkerPortServices;
+import com.hyperativa.payment.securecard.port.services.JwtTokenPortServices;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
-public class SecureteJwtTokenConfig implements  JwtTokenPort {
+public class SecureteJwtTokenConfig implements  JwtTokenPortServices {
 
-    private final CertificateWorkerPort certificateWorkerService;
+    private final CertificateWorkerPortServices certificateWorkerService;
     static final long JWT_EXPIRATION_TIME = 3600000; // 1 hour
 
-    public SecureteJwtTokenConfig(CertificateWorkerPort certificateWorkerService) {
+    public SecureteJwtTokenConfig(CertificateWorkerPortServices certificateWorkerService) {
         this.certificateWorkerService = certificateWorkerService;
     }
 

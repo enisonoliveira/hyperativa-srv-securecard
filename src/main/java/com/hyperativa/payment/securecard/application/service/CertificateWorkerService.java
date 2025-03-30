@@ -1,14 +1,14 @@
-package com.hyperativa.payment.securecard.service;
+package com.hyperativa.payment.securecard.application.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import com.hyperativa.payment.securecard.port.CertificateWorkerPort;
 
 import io.micrometer.core.instrument.util.IOUtils;
 
 import javax.xml.bind.DatatypeConverter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -23,8 +23,10 @@ import java.security.spec.X509EncodedKeySpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.hyperativa.payment.securecard.port.services.CertificateWorkerPortServices;
+
 @Service
-public class CertificateWorkerService implements CertificateWorkerPort {
+public class CertificateWorkerService implements CertificateWorkerPortServices {
 
     @Value("${application.public.key.path}")
     private String pathPublic;

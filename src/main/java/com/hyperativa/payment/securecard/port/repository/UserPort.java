@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.port;
+package com.hyperativa.payment.securecard.port.repository;
 
 import java.util.Optional;
 

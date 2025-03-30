@@ -1,13 +1,12 @@
-package com.hyperativa.payment.securecard.infrastructure.adapter;
+package com.hyperativa.payment.securecard.infrastructure.adapter.repositories;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 
 import com.hyperativa.payment.securecard.model.CardEntity;
-import com.hyperativa.payment.securecard.port.CardPort;
+import com.hyperativa.payment.securecard.port.repository.CardPort;
 
 @Repository
 public interface CardAdapter extends JpaRepository<CardEntity, Long>, CardPort {
