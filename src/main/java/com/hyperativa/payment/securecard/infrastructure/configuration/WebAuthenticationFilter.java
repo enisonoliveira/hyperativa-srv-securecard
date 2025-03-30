@@ -1,11 +1,11 @@
-package com.hyperativa.payment.securecard.infrastructure.adapter.web;
+package com.hyperativa.payment.securecard.infrastructure.configuration;
 
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.hyperativa.payment.securecard.infrastructure.port.JwtTokenProvider;
+import com.hyperativa.payment.securecard.port.JwtTokenPort;
 
 import org.springframework.stereotype.Component;
 
@@ -14,9 +14,9 @@ import java.io.IOException;
 @Component
 public class WebAuthenticationFilter extends OncePerRequestFilter{
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenPort jwtTokenProvider;
 
-    public WebAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
+    public WebAuthenticationFilter(JwtTokenPort jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 

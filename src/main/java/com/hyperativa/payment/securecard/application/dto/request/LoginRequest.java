@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.api.dto.request;
+package com.hyperativa.payment.securecard.application.dto.request;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotEmpty;

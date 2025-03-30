@@ -1,10 +1,10 @@
-package com.hyperativa.payment.securecard.infrastructure.service.impl;
+package com.hyperativa.payment.securecard.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import com.hyperativa.payment.securecard.infrastructure.service.CertificateWorkerService;
+import com.hyperativa.payment.securecard.port.CertificateWorkerPort;
 
 import io.micrometer.core.instrument.util.IOUtils;
 
@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
-public class CertificateWorkerServiceImpl implements CertificateWorkerService {
+public class CertificateWorkerService implements CertificateWorkerPort {
 
     @Value("${application.public.key.path}")
     private String pathPublic;
@@ -34,7 +34,7 @@ public class CertificateWorkerServiceImpl implements CertificateWorkerService {
 
     private static final String ALGORITHM = "RSA";
 
-    private static final Logger log = LoggerFactory.getLogger(CertificateWorkerServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(CertificateWorkerService.class);
 
     /**
      * Retrieve the Private Key from an X.509 PEM file.

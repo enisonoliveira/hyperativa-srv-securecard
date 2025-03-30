@@ -1,9 +1,9 @@
-package com.hyperativa.payment.securecard.infrastructure.service;
+package com.hyperativa.payment.securecard.port;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-public interface CertificateWorkerService {
+public interface CertificateWorkerPort {
 
 	RSAPrivateKey getPrivateKeyFromString();
 

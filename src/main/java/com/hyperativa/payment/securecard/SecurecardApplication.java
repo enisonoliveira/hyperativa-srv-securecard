@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EntityScan(basePackages = "com.hyperativa.payment.securecard.domain.model")  // Escaneia os modelos
+@EntityScan(basePackages = "com.hyperativa.payment.securecard.infrastructure.domain")  // Escaneia os modelos
 @ComponentScan(basePackages = "com.hyperativa.payment.securecard")  // Escaneia todos os pacotes abaixo
 public class SecurecardApplication {
 

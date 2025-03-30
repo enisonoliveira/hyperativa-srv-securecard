@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.domain.model;
+package com.hyperativa.payment.securecard.model;
 
 import java.util.Collection;
 import java.util.List;

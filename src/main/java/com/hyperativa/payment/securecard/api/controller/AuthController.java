@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hyperativa.payment.securecard.api.dto.request.LoginRequest;
-import com.hyperativa.payment.securecard.api.dto.response.TokenResponse;
-import com.hyperativa.payment.securecard.infrastructure.port.JwtTokenProvider;
+import com.hyperativa.payment.securecard.application.dto.request.LoginRequest;
+import com.hyperativa.payment.securecard.application.dto.response.TokenResponse;
+import com.hyperativa.payment.securecard.port.JwtTokenPort;
 
 @RestController
 @RequestMapping("/api")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenPort jwtTokenProvider;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenPort jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
     }

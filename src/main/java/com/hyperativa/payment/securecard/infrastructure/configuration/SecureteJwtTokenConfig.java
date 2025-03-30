@@ -1,28 +1,28 @@
-package com.hyperativa.payment.securecard.infrastructure.adapter.security;
+package com.hyperativa.payment.securecard.infrastructure.configuration;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.util.Date;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.hyperativa.payment.securecard.infrastructure.port.JwtTokenProvider;
-import com.hyperativa.payment.securecard.infrastructure.service.CertificateWorkerService;
+import com.hyperativa.payment.securecard.port.CertificateWorkerPort;
+import com.hyperativa.payment.securecard.port.JwtTokenPort;
 
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.util.Date;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
-public class SecureteJwtTokenConfig implements  JwtTokenProvider {
+public class SecureteJwtTokenConfig implements  JwtTokenPort {
 
-    private final CertificateWorkerService certificateWorkerService;
+    private final CertificateWorkerPort certificateWorkerService;
     static final long JWT_EXPIRATION_TIME = 3600000; // 1 hour
 
-    public SecureteJwtTokenConfig(CertificateWorkerService certificateWorkerService) {
+    public SecureteJwtTokenConfig(CertificateWorkerPort certificateWorkerService) {
         this.certificateWorkerService = certificateWorkerService;
     }
 

@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.api.dto.response;
+package com.hyperativa.payment.securecard.application.dto.response;
 
 public class TokenResponse {
     private String token;

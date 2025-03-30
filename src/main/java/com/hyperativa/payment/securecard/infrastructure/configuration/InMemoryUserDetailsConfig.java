@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.adapter.data;
+package com.hyperativa.payment.securecard.infrastructure.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

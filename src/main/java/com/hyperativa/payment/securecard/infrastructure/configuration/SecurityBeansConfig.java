@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.adapter.security;
+package com.hyperativa.payment.securecard.infrastructure.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.hyperativa.payment.securecard.domain.service.CustomUserDetailsService;
+import com.hyperativa.payment.securecard.service.CustomUserDetailsService;
 
 import java.util.List;
 

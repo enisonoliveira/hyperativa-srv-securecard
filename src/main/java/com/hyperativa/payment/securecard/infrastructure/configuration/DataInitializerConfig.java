@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.adapter.data;
+package com.hyperativa.payment.securecard.infrastructure.configuration;
 
 import javax.annotation.PostConstruct;
 
@@ -7,18 +7,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.hyperativa.payment.securecard.domain.model.UserEntity;
-import com.hyperativa.payment.securecard.domain.port.UserRepository;
+import com.hyperativa.payment.securecard.infrastructure.adapter.UserAdapter;
+import com.hyperativa.payment.securecard.model.UserEntity;
 
 @Configuration
 public class DataInitializerConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(DataInitializerConfig.class);
 
-    private final UserRepository userRepository;
+    private final UserAdapter userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public DataInitializerConfig(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DataInitializerConfig(UserAdapter userRepository, PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
