@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.adapter;
+package com.hyperativa.payment.securecard.infrastructure.adapter.repositories;
 
 
 

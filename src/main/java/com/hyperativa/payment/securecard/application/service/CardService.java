@@ -1,15 +1,13 @@
 package com.hyperativa.payment.securecard.application.service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hyperativa.payment.securecard.application.dto.request.CardRequest;
+import com.hyperativa.payment.securecard.application.dto.response.CardResponse;
 import com.hyperativa.payment.securecard.infrastructure.adapter.card.TxtFileAdapter;
 import com.hyperativa.payment.securecard.infrastructure.adapter.repositories.CardAdapter;
 import com.hyperativa.payment.securecard.model.CardEntity;
@@ -45,4 +43,13 @@ public class CardService implements CardPortServices{
             cardPort.saveAll(cards);
         }
     }
+
+    @Override
+    public CardResponse findByCardNumber(String cardNumber) {
+        return this.cardPort.findByCardNumber(cardNumber)
+                .map(cardEntity -> new CardResponse(cardEntity.getId()))  
+                .orElseThrow(() -> new RuntimeException("Card not found"));  
+    }
+    
+    
 }

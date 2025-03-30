@@ -2,6 +2,7 @@ package com.hyperativa.payment.securecard.api.controller;
 
 import com.hyperativa.payment.securecard.api.based.CardBased;
 import com.hyperativa.payment.securecard.application.dto.request.*;
+import com.hyperativa.payment.securecard.application.dto.response.CardResponse;
 import com.hyperativa.payment.securecard.port.services.CardPortServices;
 
 import org.springframework.http.ResponseEntity;
@@ -24,16 +25,22 @@ public class CardController implements CardBased {
 
     
     @Override
-    public ResponseEntity<String> addCard(@RequestBody CardRequest cardRequest) {
+    public ResponseEntity<String> addCard(CardRequest cardRequest) {
         cardService.saveCard(cardRequest);
         return ResponseEntity.ok("Card saved successfully!");
     }
 
    
     @Override
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile( MultipartFile file) {
        
         fileProcessingPort.queueFileProcessing(file);
         return ResponseEntity.ok("File uploaded successfully!");
     }
+
+    @Override
+    public CardResponse searchCardByNumber(String cardByStringNumber) {
+       return  cardService.findByCardNumber(cardByStringNumber);
+    }
+
 }
