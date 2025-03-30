@@ -1,10 +1,10 @@
 package com.hyperativa.payment.securecard.infrastructure.adapter.web;
 
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class WebSecurityFilter {
@@ -18,27 +18,28 @@ public class WebSecurityFilter {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(auth -> auth
-                .antMatchers("/v3/api-docs",
-                "/v3/api-docs*/**",
-                "/configuration/ui",
-                "/swagger-resources/**",
-                "/api/token",
-                "/api/validate",
-                "/configuration/security",
-                "/configuration/security",
-                "/swagger-ui.html",
-                "/swagger-ui/**",
-                "/swagger-ui/index.html",
-                "/webjars/**").permitAll() // Public endpoints
+            .authorizeRequests(auth -> auth
+                .antMatchers(
+                    "/v3/api-docs",
+                    "/v3/api-docs/**",
+                    "/swagger-resources/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/swagger-ui/index.html",
+                    "/h2-console/**",
+                    "/api/token",
+                    "/api/validate",
+                    "/configuration/security",
+                    "/webjars/**"
+                ).permitAll() // Public endpoints
                 .anyRequest().authenticated() // All other endpoints require authentication
             )
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Add custom filter
-            .csrf(csrf -> csrf.disable()); // Disable CSRF for simplicity
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity
+            .headers(headers -> headers
+                .frameOptions().sameOrigin() // Permite que a aplicação seja carregada em um iframe da mesma origem
+            );
 
         return http.build();
     }
-
-  
-
 }
