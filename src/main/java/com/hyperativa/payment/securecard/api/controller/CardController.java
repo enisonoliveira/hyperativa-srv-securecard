@@ -19,12 +19,14 @@ public class CardController implements CardBased {
     }
 
     
+    @Override
     public ResponseEntity<String> addCard(@RequestBody CardRequest cardRequest) {
         cardService.saveCard(cardRequest);
         return ResponseEntity.ok("Card saved successfully!");
     }
 
    
+    @Override
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("File is empty!");
