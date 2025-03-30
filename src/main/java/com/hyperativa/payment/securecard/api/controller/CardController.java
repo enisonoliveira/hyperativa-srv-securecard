@@ -5,6 +5,9 @@ import com.hyperativa.payment.securecard.application.dto.request.*;
 import com.hyperativa.payment.securecard.application.dto.response.CardResponse;
 import com.hyperativa.payment.securecard.port.services.CardPortServices;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,17 +28,19 @@ public class CardController implements CardBased {
 
     
     @Override
-    public ResponseEntity<String> addCard(CardRequest cardRequest) {
+    public ResponseEntity<Map<String, String>> addCard(CardRequest cardRequest) {
         cardService.saveCard(cardRequest);
-        return ResponseEntity.ok("Card saved successfully!");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Card saved successfully!");
+        return ResponseEntity.ok(response);  // Returning the response as JSON
     }
 
-   
     @Override
-    public ResponseEntity<String> uploadFile( MultipartFile file) {
-       
+    public ResponseEntity<Map<String, String>> uploadFile(MultipartFile file) {
         fileProcessingPort.queueFileProcessing(file);
-        return ResponseEntity.ok("File uploaded successfully!");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "File uploaded successfully!");
+        return ResponseEntity.ok(response);  // Returning the response as JSON
     }
 
     @Override

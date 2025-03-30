@@ -15,11 +15,32 @@ public class CardEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    // Adjusted the column type to TEXT for cardNumber to allow longer encrypted values
+    @Column(nullable = false, unique = true, columnDefinition = "TEXT") 
     private String cardNumber;
 
     @Column(nullable = false)
     private String holderName;
+
+    @Column(nullable = false)
+    private String expirationDate;
+
+     // Adjusted the column type to TEXT for cardNumber to allow longer encrypted values
+     @Column(nullable = false, unique = true, columnDefinition = "TEXT") 
+    private String cvv;
+
+    // Default constructor
+    public CardEntity() {}
+
+    // Constructor with parameters
+    public CardEntity(String cardNumber, String holderName, String expirationDate, String cvv) {
+        this.cardNumber = cardNumber;
+        this.holderName = holderName;
+        this.expirationDate = expirationDate;
+        this.cvv = cvv;
+    }
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -60,21 +81,4 @@ public class CardEntity {
     public void setCvv(String cvv) {
         this.cvv = cvv;
     }
-
-    @Column(nullable = false)
-    private String expirationDate;
-
-    @Column(nullable = false)
-    private String cvv;
-
-    public CardEntity() {}
-
-    public CardEntity(String cardNumber, String holderName, String expirationDate, String cvv) {
-        this.cardNumber = cardNumber;
-        this.holderName = holderName;
-        this.expirationDate = expirationDate;
-        this.cvv = cvv;
-    }
-
-    // Getters and Setters...
 }

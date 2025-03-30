@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.adapter.card.secutiry;
+package com.hyperativa.payment.securecard.infrastructure.adapter.secutiry;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

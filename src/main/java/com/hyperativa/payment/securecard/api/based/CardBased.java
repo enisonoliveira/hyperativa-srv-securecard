@@ -1,5 +1,7 @@
 package com.hyperativa.payment.securecard.api.based;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -18,10 +20,10 @@ import com.hyperativa.payment.securecard.application.dto.response.CardResponse;
 public interface CardBased {
     
     @PostMapping("/save")
-    public ResponseEntity<String> addCard( @RequestBody CardRequest cardRequest);
+    public ResponseEntity<Map<String, String>> addCard( @RequestBody CardRequest cardRequest);
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@Valid @RequestParam("file") MultipartFile file);
+    public ResponseEntity<Map<String, String>> uploadFile(@Valid @RequestParam("file") MultipartFile file);
 
     @GetMapping("/search/{number}")
     public CardResponse searchCardByNumber(@Valid @PathVariable("number") String cardNumber);

@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration;
+package com.hyperativa.payment.securecard.infrastructure.configuration.openapi;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
