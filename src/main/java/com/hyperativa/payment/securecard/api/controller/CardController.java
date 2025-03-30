@@ -1,5 +1,6 @@
 package com.hyperativa.payment.securecard.api.controller;
 
+import com.hyperativa.payment.securecard.api.based.CardBased;
 import com.hyperativa.payment.securecard.application.dto.request.*;
 import com.hyperativa.payment.securecard.port.CardServicePort;
 
@@ -9,8 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/cards")
-public class CardController {
+public class CardController implements CardBased {
 
     private final CardServicePort cardService;
 
@@ -18,15 +18,13 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    // 📌 Cadastro de um único cartão via JSON
-    @PostMapping
+    
     public ResponseEntity<String> addCard(@RequestBody CardRequest cardRequest) {
         cardService.saveCard(cardRequest);
         return ResponseEntity.ok("Card saved successfully!");
     }
 
-    // 📌 Upload de arquivo TXT com múltiplos cartões
-    @PostMapping("/upload")
+   
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("File is empty!");
