@@ -24,11 +24,11 @@ public class InMemoryFileQueueAdapter implements FileProcessingPort {
 
     @Override
     public void queueFileProcessing(MultipartFile file) {
-        fileQueue.add(file);
          if (file.isEmpty()) {
             logger.error("There aren't Card items to import in this file : {}", file);
             throw new RuntimeException(""); 
         }else{
+            fileQueue.add(file);
             logger.info("File added to processing queue: {}", file.getOriginalFilename());
             asyncFileProcessor.processQueue(fileQueue); 
         }

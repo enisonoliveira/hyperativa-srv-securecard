@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration;
+package com.hyperativa.payment.securecard.infrastructure.configuration.web;
 
 
 import org.springframework.security.core.Authentication;
@@ -9,6 +9,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.hyperativa.payment.securecard.port.services.JwtTokenPortServices;
 
@@ -22,10 +27,11 @@ public class WebAuthenticationFilter extends OncePerRequestFilter{
     }
 
 
+    @SuppressWarnings("null")
     @Override
-    protected void doFilterInternal(javax.servlet.http.HttpServletRequest request,
-            javax.servlet.http.HttpServletResponse response, javax.servlet.FilterChain filterChain)
-            throws javax.servlet.ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+            HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
                 Authentication authentication ;
                 String authHeader = request.getHeader("Authorization");
                 

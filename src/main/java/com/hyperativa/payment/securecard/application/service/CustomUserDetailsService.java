@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.hyperativa.payment.securecard.infrastructure.adapter.repositories.UserAdapter;
+import com.hyperativa.payment.securecard.infrastructure.adapter.data.UserAdapter;
 import com.hyperativa.payment.securecard.model.UserEntity;
 
 @Service

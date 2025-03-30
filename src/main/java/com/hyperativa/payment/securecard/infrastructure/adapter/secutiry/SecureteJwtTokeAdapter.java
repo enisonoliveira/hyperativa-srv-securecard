@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration;
+package com.hyperativa.payment.securecard.infrastructure.adapter.card.secutiry;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -17,12 +17,12 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
-public class SecureteJwtTokenConfig implements  JwtTokenPortServices {
+public class SecureteJwtTokeAdapter implements  JwtTokenPortServices {
 
     private final CertificateWorkerPortServices certificateWorkerService;
     static final long JWT_EXPIRATION_TIME = 3600000; // 1 hour
 
-    public SecureteJwtTokenConfig(CertificateWorkerPortServices certificateWorkerService) {
+    public SecureteJwtTokeAdapter(CertificateWorkerPortServices certificateWorkerService) {
         this.certificateWorkerService = certificateWorkerService;
     }
 

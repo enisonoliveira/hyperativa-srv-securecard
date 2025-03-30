@@ -18,7 +18,7 @@ import com.hyperativa.payment.securecard.application.dto.response.CardResponse;
 public interface CardBased {
     
     @PostMapping("/save")
-    public ResponseEntity<String> addCard(@Valid @RequestBody CardRequest cardRequest);
+    public ResponseEntity<String> addCard( @RequestBody CardRequest cardRequest);
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@Valid @RequestParam("file") MultipartFile file);

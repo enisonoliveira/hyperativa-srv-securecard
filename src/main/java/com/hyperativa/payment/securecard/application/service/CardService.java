@@ -1,6 +1,5 @@
 package com.hyperativa.payment.securecard.application.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,8 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hyperativa.payment.securecard.application.dto.request.CardRequest;
 import com.hyperativa.payment.securecard.application.dto.response.CardResponse;
-import com.hyperativa.payment.securecard.infrastructure.adapter.card.TxtFileAdapter;
-import com.hyperativa.payment.securecard.infrastructure.adapter.repositories.CardAdapter;
+import com.hyperativa.payment.securecard.infrastructure.adapter.data.CardAdapter;
+import com.hyperativa.payment.securecard.infrastructure.adapter.service.CardInputAdapter;
 import com.hyperativa.payment.securecard.model.CardEntity;
 import com.hyperativa.payment.securecard.port.services.CardPortServices;
 
@@ -17,27 +16,37 @@ import com.hyperativa.payment.securecard.port.services.CardPortServices;
 public class CardService implements CardPortServices{
 
     private final CardAdapter cardPort;
-    private final TxtFileAdapter txtFileAdapter;
+    private final CardInputAdapter txtFileAdapter;
+    private final CardInputAdapter cardInputAdapter;
 
-    public CardService(CardAdapter cardPort,TxtFileAdapter txtFileAdapter) {
+    public CardService(CardAdapter cardPort,CardInputAdapter txtFileAdapter,CardInputAdapter cardInputAdapter) {
         this.cardPort = cardPort;
+        this.cardInputAdapter=cardInputAdapter;
         this.txtFileAdapter=txtFileAdapter;
     }
 
     @Override
     public void saveCard(CardRequest cardRequest) {
-        CardEntity card = new CardEntity(
-            cardRequest.getCardNumber(),
-            cardRequest.getHolderName(),
-            cardRequest.getExpirationDate(),
-            cardRequest.getCvv()
-        );
+
+        CardEntity card;
+        try {
+            card = cardInputAdapter.cardRequest(cardRequest);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+      
+
         cardPort.save(card);
     }
 
     @Override
-    public void processFile(MultipartFile file) throws IOException {
-        List<CardEntity> cards = txtFileAdapter.parseTxtFile(file);
+    public void processFile(MultipartFile file) {
+        List<CardEntity> cards;
+        try {
+            cards = txtFileAdapter.parseTxtFile(file);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         if (!cards.isEmpty()) {
             cardPort.saveAll(cards);

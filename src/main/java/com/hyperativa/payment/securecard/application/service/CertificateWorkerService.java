@@ -111,4 +111,6 @@ public class CertificateWorkerService implements CertificateWorkerPortServices {
         tokens = tokens[1].split(endDelimiter);
         return DatatypeConverter.parseBase64Binary(tokens[0]);
     }
+
+ 
 }

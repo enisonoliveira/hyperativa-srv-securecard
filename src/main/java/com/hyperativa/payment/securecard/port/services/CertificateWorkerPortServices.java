@@ -8,5 +8,5 @@ public interface CertificateWorkerPortServices {
 	RSAPrivateKey getPrivateKeyFromString();
 
 	RSAPublicKey getPublicKey() ;
-	
+
 }

@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration;
+package com.hyperativa.payment.securecard.infrastructure.configuration.data;
 
 import javax.annotation.PostConstruct;
 
@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.hyperativa.payment.securecard.infrastructure.adapter.repositories.UserAdapter;
+import com.hyperativa.payment.securecard.infrastructure.adapter.data.UserAdapter;
 import com.hyperativa.payment.securecard.model.UserEntity;
 
 @Configuration
