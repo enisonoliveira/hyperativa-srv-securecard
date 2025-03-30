@@ -1,20 +1,17 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration;
+package com.hyperativa.payment.securecard.infrastructure.adapter.web;
 
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.hyperativa.payment.securecard.infrastructure.configuration.adapter.JwtAuthenticationFilterAdpter;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @Configuration
-public class SecurityConfig {
+public class WebSecurityFilter {
 
-    private final JwtAuthenticationFilterAdpter jwtAuthenticationFilter;
+    private final WebAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(JwtAuthenticationFilterAdpter jwtAuthenticationFilter) {
+    public WebSecurityFilter(WebAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
@@ -26,6 +23,8 @@ public class SecurityConfig {
                 "/v3/api-docs*/**",
                 "/configuration/ui",
                 "/swagger-resources/**",
+                "/api/token",
+                "/api/validate",
                 "/configuration/security",
                 "/configuration/security",
                 "/swagger-ui.html",
@@ -39,5 +38,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+  
 
 }

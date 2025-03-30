@@ -1,34 +1,35 @@
 package com.hyperativa.payment.securecard.api.controller;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
-import com.hyperativa.payment.securecard.infrastructure.configuration.port.JwtTokenProvider;
+import com.hyperativa.payment.securecard.infrastructure.port.JwtTokenProvider;
 
 @RestController
 @RequestMapping("/api")
 public class AuthController {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
 
-    public AuthController(JwtTokenProvider jwtTokenProvider) {
+    public AuthController(JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
         this.jwtTokenProvider = jwtTokenProvider;
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/token")
-    public ResponseEntity<String> generateToken(Authentication authentication) throws Exception {
-        String token = jwtTokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(token);
-    }
+    public ResponseEntity<String> generateToken(@RequestParam String username, @RequestParam String password) throws Exception {
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(username, password)
+        );
 
-    @GetMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
-        boolean isValid = jwtTokenProvider.validateToken(token);
-        return ResponseEntity.ok(isValid);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String token = jwtTokenProvider.generateToken(userDetails);
+
+        return ResponseEntity.ok(token);
     }
 }

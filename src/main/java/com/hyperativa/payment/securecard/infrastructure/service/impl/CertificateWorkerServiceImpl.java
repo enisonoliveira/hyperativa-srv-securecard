@@ -1,10 +1,10 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration.service.impl;
+package com.hyperativa.payment.securecard.infrastructure.service.impl;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import com.hyperativa.payment.securecard.infrastructure.configuration.service.CertificateWorkerService;
+import com.hyperativa.payment.securecard.infrastructure.service.CertificateWorkerService;
 
 import io.micrometer.core.instrument.util.IOUtils;
 

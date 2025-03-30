@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration.adapter;
+package com.hyperativa.payment.securecard.infrastructure.adapter.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -6,30 +6,30 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.hyperativa.payment.securecard.infrastructure.configuration.port.JwtTokenProvider;
-import com.hyperativa.payment.securecard.infrastructure.configuration.service.CertificateWorkerService;
+import com.hyperativa.payment.securecard.infrastructure.port.JwtTokenProvider;
+import com.hyperativa.payment.securecard.infrastructure.service.CertificateWorkerService;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Date;
 
 @Component
-public class JwtTokenProviderAdapter implements  JwtTokenProvider {
+public class SecureteJwtTokenConfig implements  JwtTokenProvider {
 
     private final CertificateWorkerService certificateWorkerService;
     static final long JWT_EXPIRATION_TIME = 3600000; // 1 hour
 
-    public JwtTokenProviderAdapter(CertificateWorkerService certificateWorkerService) {
+    public SecureteJwtTokenConfig(CertificateWorkerService certificateWorkerService) {
         this.certificateWorkerService = certificateWorkerService;
     }
 
     // Generate a JWT Token using the private key
     @Override
-    public String generateToken(Authentication authentication) throws Exception {
-        User user = (User) authentication.getPrincipal();
+    public String generateToken(UserDetails user)  {
+
         PrivateKey privateKey = this.certificateWorkerService.getPrivateKeyFromString();
 
         return Jwts.builder()

@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration.service;
+package com.hyperativa.payment.securecard.infrastructure.service;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
