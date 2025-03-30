@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hyperativa.payment.securecard.application.dto.request.CardRequest;
+import com.hyperativa.payment.securecard.infrastructure.adapter.card.TxtFileAdapter;
 import com.hyperativa.payment.securecard.infrastructure.adapter.repositories.CardAdapter;
 import com.hyperativa.payment.securecard.model.CardEntity;
 import com.hyperativa.payment.securecard.port.services.CardPortServices;
@@ -18,9 +19,11 @@ import com.hyperativa.payment.securecard.port.services.CardPortServices;
 public class CardService implements CardPortServices{
 
     private final CardAdapter cardPort;
+    private final TxtFileAdapter txtFileAdapter;
 
-    public CardService(CardAdapter cardPort) {
+    public CardService(CardAdapter cardPort,TxtFileAdapter txtFileAdapter) {
         this.cardPort = cardPort;
+        this.txtFileAdapter=txtFileAdapter;
     }
 
     @Override
@@ -36,19 +39,10 @@ public class CardService implements CardPortServices{
 
     @Override
     public void processFile(MultipartFile file) throws IOException {
-        List<CardEntity> cards = new ArrayList<>();
+        List<CardEntity> cards = txtFileAdapter.parseTxtFile(file);
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split("\\|");
-                if (parts.length == 4) {
-                    CardEntity card = new CardEntity(parts[0], parts[1], parts[2], parts[3]);
-                    cards.add(card);
-                }
-            }
+        if (!cards.isEmpty()) {
+            cardPort.saveAll(cards);
         }
-
-        cardPort.saveAll(cards);
     }
 }

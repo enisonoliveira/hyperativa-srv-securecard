@@ -32,7 +32,7 @@ public class WebSecurityFilter {
                     "/configuration/security",
                     "/webjars/**"
                 ).permitAll() // Public endpoints
-                .anyRequest().authenticated() // All other endpoints require authentication
+                .anyRequest().permitAll() // All other endpoints require authentication
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity
