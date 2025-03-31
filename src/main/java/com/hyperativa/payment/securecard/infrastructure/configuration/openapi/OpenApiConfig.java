@@ -53,6 +53,7 @@ public class OpenApiConfig implements WebMvcConfigurer {
 
    
 
+    @SuppressWarnings("null")
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController(applicationVersion)
