@@ -1,0 +1,100 @@
+{
+    "info": {
+      "name": "HYPERATIVA-SRV-SECURECARD",
+      "description": "Documentation for WEB-API HYPERATIVA-SRV-SECURECARD",
+      "version": "V1",
+      "_postman_id": "unique-id-for-your-collection",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Generate Token",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:8080/api/token",
+            "host": ["http://localhost:8080"],
+            "path": ["api", "token"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}"
+          }
+        }
+      },
+      {
+        "name": "Upload File",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:8080/api/cards/upload",
+            "host": ["http://localhost:8080"],
+            "path": ["api", "cards", "upload"]
+          },
+          "body": {
+            "mode": "formdata",
+            "formdata": [
+              {
+                "key": "file",
+                "type": "file",
+                "src": ""
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Save Card",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:8080/api/cards/save",
+            "host": ["http://localhost:8080"],
+            "path": ["api", "cards", "save"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"cardNumber\": \"string\",\n  \"holderName\": \"string\",\n  \"expirationDate\": \"string\",\n  \"cvv\": \"string\"\n}"
+          }
+        }
+      },
+      {
+        "name": "Search Card by Number",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:8080/api/cards/search/{number}",
+            "host": ["http://localhost:8080"],
+            "path": ["api", "cards", "search", "{number}"],
+            "variable": [
+              {
+                "key": "number",
+                "value": "string"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "event": [],
+    "variable": []
+  }
