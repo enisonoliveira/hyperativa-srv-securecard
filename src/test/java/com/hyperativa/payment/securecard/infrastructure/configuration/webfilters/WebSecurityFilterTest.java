@@ -1,4 +1,4 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration.web;
+package com.hyperativa.payment.securecard.infrastructure.configuration.webfilters;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -19,8 +18,6 @@ class WebSecurityFilterTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private SecurityFilterChain securityFilterChain;
 
     private MockHttpServletRequest request;
 

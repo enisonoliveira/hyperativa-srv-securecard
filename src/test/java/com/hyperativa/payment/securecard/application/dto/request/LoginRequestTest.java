@@ -16,9 +16,7 @@ class LoginRequestTest {
     private Validator validator;
 
     // Define expected error messages as constants for reuse
-    private static final String USERNAME_REQUIRED_MSG = "Username is required";
     private static final String USERNAME_EMPTY_MSG = "Username cannot be empty";
-    private static final String PASSWORD_REQUIRED_MSG = "Password is required";
     private static final String PASSWORD_EMPTY_MSG = "Password cannot be empty";
 
     @BeforeEach

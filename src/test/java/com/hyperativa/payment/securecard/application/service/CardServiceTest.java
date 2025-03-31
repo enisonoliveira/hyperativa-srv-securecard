@@ -12,14 +12,14 @@ import org.mockito.*;
 
 import com.hyperativa.payment.securecard.application.dto.response.CardResponse;
 import com.hyperativa.payment.securecard.application.exeption.InvalidCardNumberException;
-import com.hyperativa.payment.securecard.infrastructure.adapter.data.CardAdapter;
 import com.hyperativa.payment.securecard.infrastructure.adapter.service.CardInputAdapter;
 import com.hyperativa.payment.securecard.model.CardEntity;
+import com.hyperativa.payment.securecard.port.repository.CardPort;
 
 class CardServiceTest {
 
     @Mock
-    private CardAdapter cardPort;
+    private CardPort cardPort;
 
     @Mock
     private CardInputAdapter cardInputAdapter;

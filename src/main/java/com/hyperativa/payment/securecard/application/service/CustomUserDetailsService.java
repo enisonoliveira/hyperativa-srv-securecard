@@ -8,15 +8,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.hyperativa.payment.securecard.infrastructure.adapter.data.UserAdapter;
 import com.hyperativa.payment.securecard.model.UserEntity;
+import com.hyperativa.payment.securecard.port.repository.UserPort;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserAdapter userPort;
+    private final UserPort userPort;
 
-    public CustomUserDetailsService(UserAdapter userPort) {
+    public CustomUserDetailsService(UserPort userPort) {
         this.userPort = userPort;
     }
 

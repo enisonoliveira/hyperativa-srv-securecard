@@ -11,19 +11,19 @@ import com.hyperativa.payment.securecard.application.dto.response.CardResponse;
 import com.hyperativa.payment.securecard.application.exeption.CardNotFoundException;
 import com.hyperativa.payment.securecard.application.exeption.InvalidCardNumberException;
 import com.hyperativa.payment.securecard.application.util.CardNumberValidate;
-import com.hyperativa.payment.securecard.infrastructure.adapter.data.CardAdapter;
 import com.hyperativa.payment.securecard.infrastructure.adapter.service.CardInputAdapter;
 import com.hyperativa.payment.securecard.model.CardEntity;
+import com.hyperativa.payment.securecard.port.repository.CardPort;
 import com.hyperativa.payment.securecard.port.services.CardPortServices;
 
 @Service
 public class CardService implements CardPortServices {
 
-    private final CardAdapter cardPort;
+    private final CardPort cardPort;
     private final CardInputAdapter txtFileAdapter;
     private final CardInputAdapter cardInputAdapter;
 
-    public CardService(CardAdapter cardPort, CardInputAdapter txtFileAdapter, CardInputAdapter cardInputAdapter) {
+    public CardService(CardPort cardPort, CardInputAdapter txtFileAdapter, CardInputAdapter cardInputAdapter) {
         this.cardPort = cardPort;
         this.cardInputAdapter = cardInputAdapter;
         this.txtFileAdapter = txtFileAdapter;

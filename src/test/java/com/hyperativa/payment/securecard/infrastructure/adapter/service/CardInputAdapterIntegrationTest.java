@@ -2,21 +2,14 @@ package com.hyperativa.payment.securecard.infrastructure.adapter.service;
 
 import com.hyperativa.payment.securecard.application.dto.request.CardRequest;
 import com.hyperativa.payment.securecard.application.exeption.InvalidCardNumberException;
-import com.hyperativa.payment.securecard.application.service.CertificateWorkerService;
 import com.hyperativa.payment.securecard.model.CardEntity;
-import com.hyperativa.payment.securecard.port.services.CertificateWorkerPortServices;
 
-import io.micrometer.core.instrument.util.IOUtils;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -30,13 +23,8 @@ import org.springframework.core.io.ClassPathResource;
 class CardInputAdapterIntegrationTest {
 
     @Autowired
-    private CertificateWorkerPortServices certificateWorkerService;
-    @Autowired
     private CardInputAdapter cardInputAdapter;
 
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     void shouldParseTxtFileSuccessfully() throws IOException,InterruptedException, ExecutionException {
@@ -56,7 +44,6 @@ class CardInputAdapterIntegrationTest {
         // Assert the parsed cards
         assertNotNull(cards);
 
-       // assertFalse(cards.isEmpty(), "Expected cards to be parsed from the file");
 
     }
 

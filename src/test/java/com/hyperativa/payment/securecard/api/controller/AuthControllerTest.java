@@ -1,7 +1,5 @@
 package com.hyperativa.payment.securecard.api.controller;
 
-import com.hyperativa.payment.securecard.application.dto.request.LoginRequest;
-import com.hyperativa.payment.securecard.application.dto.response.TokenResponse;
 import com.hyperativa.payment.securecard.port.services.JwtTokenPortServices;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -45,8 +42,6 @@ public class AuthControllerTest {
 
     @Test
     void shouldGenerateTokenWhenCredentialsAreValid() throws Exception {
-        // Prepare input and mock behaviors
-        LoginRequest loginRequest = new LoginRequest("testUser", "password123");
 
         Authentication authentication = mock(Authentication.class);
         UserDetails userDetails = mock(UserDetails.class);
@@ -69,8 +64,6 @@ public class AuthControllerTest {
     @Test
     void shouldReturnUnauthorizedWhenCredentialsAreInvalid() throws Exception {
         // Prepare input and mock behaviors
-        LoginRequest loginRequest = new LoginRequest("testUser", "wrongPassword");
-
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenThrow(new AuthenticationException("Invalid credentials") {});
 

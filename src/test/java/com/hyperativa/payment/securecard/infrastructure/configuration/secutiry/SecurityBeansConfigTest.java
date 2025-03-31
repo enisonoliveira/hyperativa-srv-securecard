@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.hyperativa.payment.securecard.infrastructure.configuration.secutiry.SecurityBeansConfig;
 
 @SpringBootTest
 class SecurityBeansConfigTest {

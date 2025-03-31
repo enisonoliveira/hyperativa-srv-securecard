@@ -2,31 +2,28 @@ package com.hyperativa.payment.securecard.infrastructure.configuration.data;
 
 import static org.mockito.Mockito.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.hyperativa.payment.securecard.infrastructure.adapter.data.UserAdapter;
-import com.hyperativa.payment.securecard.model.UserEntity;
 
-import javax.annotation.PostConstruct;
+import com.hyperativa.payment.securecard.model.UserEntity;
+import com.hyperativa.payment.securecard.port.repository.UserPort;
+
 import java.util.Optional;
 
+@SpringBootTest
 class DataInitializerConfigTest {
 
-    @Mock
-    private UserAdapter userRepository;
+    @MockBean
+    private UserPort userRepository;
 
-    @Mock
+    @MockBean
     private PasswordEncoder passwordEncoder;
 
-    @InjectMocks
+    @Autowired
     private DataInitializerConfig dataInitializerConfig;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this); // Initialize mocks
-    }
 
     @Test
     void shouldCreateDefaultAdminUserWhenNotExists() {
@@ -34,8 +31,8 @@ class DataInitializerConfigTest {
         when(userRepository.findByUsername("admin")).thenReturn(Optional.empty());
         when(passwordEncoder.encode("123456")).thenReturn("encodedPassword");
 
-        // When: The initDatabase method is called (which will create the user)
-        dataInitializerConfig.initDatabase();
+        // When: The initDatabase method is called
+        dataInitializerConfig.initDatabase();  // Manually calling initDatabase()
 
         // Then: Verify that the userRepository.save method was called with the correct parameters
         verify(userRepository, times(1)).save(argThat(user -> 
@@ -50,7 +47,7 @@ class DataInitializerConfigTest {
         when(userRepository.findByUsername("admin")).thenReturn(Optional.of(existingUser));
 
         // When: The initDatabase method is called
-        dataInitializerConfig.initDatabase();
+        dataInitializerConfig.initDatabase();  // Manually calling initDatabase()
 
         // Then: Verify that userRepository.save was never called since the user already exists
         verify(userRepository, times(0)).save(any(UserEntity.class));

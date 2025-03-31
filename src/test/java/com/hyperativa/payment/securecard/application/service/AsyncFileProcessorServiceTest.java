@@ -1,9 +1,7 @@
 package com.hyperativa.payment.securecard.application.service;
 
-import com.hyperativa.payment.securecard.port.services.CardPortServices;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

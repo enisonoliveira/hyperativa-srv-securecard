@@ -4,7 +4,6 @@ package com.hyperativa.payment.securecard.application.service;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.hyperativa.payment.securecard.infrastructure.adapter.data.UserAdapter;
 import com.hyperativa.payment.securecard.model.UserEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,8 @@ import org.mockito.*;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.hyperativa.payment.securecard.port.repository.UserPort;
 
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ class CustomUserDetailsServiceTest {
     private CustomUserDetailsService customUserDetailsService;
 
     @Mock
-    private UserAdapter userPort;
+    private UserPort userPort;
 
     private UserEntity user;
 

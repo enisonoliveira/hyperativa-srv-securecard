@@ -11,14 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ExtendWith(MockitoExtension.class)
-public class CardControllerTest {
+ class CardControllerTest {
 
     private MockMvc mockMvc;
 
@@ -50,10 +46,7 @@ public class CardControllerTest {
 
     @Test
     void shouldAddCardSuccessfully() throws Exception {
-        // Prepare input data
-        CardRequest cardRequest = new CardRequest("1234567890123456", "John Doe", "12/25", "123");
 
-        // Mock service behavior (saving the card)
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("message", "Card saved successfully!");
         doNothing().when(cardService).saveCard(any(CardRequest.class));

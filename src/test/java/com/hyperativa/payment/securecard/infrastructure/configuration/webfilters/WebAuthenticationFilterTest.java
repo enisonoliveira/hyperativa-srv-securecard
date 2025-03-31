@@ -1,6 +1,7 @@
-package com.hyperativa.payment.securecard.infrastructure.configuration.web;
+package com.hyperativa.payment.securecard.infrastructure.configuration.webfilters;
 
 import com.hyperativa.payment.securecard.port.services.JwtTokenPortServices;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -10,14 +11,16 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+import com.hyperativa.payment.securecard.infrastructure.configuration.webfilters.WebAuthenticationFilter;
 
 class WebAuthenticationFilterTest {
 
