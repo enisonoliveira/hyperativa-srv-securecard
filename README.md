@@ -19,7 +19,7 @@ Welcome to the documentation for the **HYPERATIVA-SRV-SECURECARD** Web API. This
 **Purpose:** Generates a JWT token for authenticated access.
 
 **defaul username:**`admin`
-**fataul password:**`123456`
+**defaul password:**`123456`
 
 **Request Body:**
 ```json
