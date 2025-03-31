@@ -18,8 +18,8 @@ Welcome to the documentation for the **HYPERATIVA-SRV-SECURECARD** Web API. This
 **Endpoint:** `POST /api/token`  
 **Purpose:** Generates a JWT token for authenticated access.
 
-#defaul username:admin
-#fataul password:123456
+##defaul username:admin
+##fataul password:123456
 
 **Request Body:**
 ```json
