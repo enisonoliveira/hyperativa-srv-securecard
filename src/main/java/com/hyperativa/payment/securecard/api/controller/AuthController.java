@@ -1,34 +1,47 @@
 package com.hyperativa.payment.securecard.api.controller;
 
-import org.springframework.security.core.Authentication;
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hyperativa.payment.securecard.infrastructure.configuration.port.JwtTokenProvider;
+import com.hyperativa.payment.securecard.api.based.AuthBased;
+import com.hyperativa.payment.securecard.application.dto.request.LoginRequest;
+import com.hyperativa.payment.securecard.application.dto.response.TokenResponse;
+import com.hyperativa.payment.securecard.port.services.JwtTokenPortServices;
 
 @RestController
-@RequestMapping("/api")
-public class AuthController {
+public class AuthController implements  AuthBased{
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenPortServices jwtTokenProvider;
 
-    public AuthController(JwtTokenProvider jwtTokenProvider) {
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenPortServices jwtTokenProvider) {
+        this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @PostMapping("/token")
-    public ResponseEntity<String> generateToken(Authentication authentication) throws Exception {
-        String token = jwtTokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(token);
-    }
+    @Override
+    public ResponseEntity<TokenResponse> generateToken(@Valid @RequestBody LoginRequest loginRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
 
-    @GetMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
-        boolean isValid = jwtTokenProvider.validateToken(token);
-        return ResponseEntity.ok(isValid);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            String token = jwtTokenProvider.generateToken(userDetails);
+
+            return ResponseEntity.ok(new TokenResponse(token)); 
+
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(401).body(new TokenResponse(e.getMessage()));
+        }
     }
 }
