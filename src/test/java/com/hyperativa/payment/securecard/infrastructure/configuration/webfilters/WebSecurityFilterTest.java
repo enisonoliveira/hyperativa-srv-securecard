@@ -37,7 +37,7 @@ class WebSecurityFilterTest {
     void shouldAuthenticatePrivateEndpoints() throws Exception {
         // Test a private endpoint
         mockMvc.perform(get("/api/private-endpoint"))
-                .andExpect(status().isForbidden()); // Expect 403 Forbiden for unauthenticated requests
+                .andExpect(status().isUnauthorized()); 
     }
 
     @Test
